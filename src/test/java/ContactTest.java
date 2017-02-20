@@ -4,9 +4,10 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class LibraryTest {
+public class ContactTest
+{
     @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+        Contact classUnderTest = new Contact();
+       // assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
     }
 }
