@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -25,34 +26,32 @@ public class Agenda
 
     public void deleteContact(String userInput)
     {
-        for (Contact contact : contactList)
+        synchronized(contactList)
         {
-            if (contact.getName().equals(userInput) || contact.getSurname().equals(userInput) || contact.getEmailAddress().equals(userInput) || contact.getPhoneNumber().equals(userInput))
+            for (int i=0; i<contactList.size();i++)
+
             {
-                contactList.remove(contact);
+                if (contactList.get(i).getName().equals(userInput) || contactList.get(i).getSurname().equals(userInput) || contactList.get(i).getEmailAddress().equals(userInput) || contactList.get(i).getPhoneNumber()
+                    .equals(userInput))
+                {
+                    contactList.remove(contactList.get(i));
+                }
             }
         }
     }
 
-    public void editContact()
+    public List<Contact> searchContact(String userInput)
     {
-
+        List<Contact> foundContactsList = new ArrayList<Contact>();
+        for (Contact contact : contactList)
+        {
+            if (contact.getName().equals(userInput) || contact.getSurname().equals(userInput) || contact.getEmailAddress().equals(userInput) || contact.getPhoneNumber().equals(userInput))
+            {
+                foundContactsList.add(contact);
+            }
+        }
+        return foundContactsList;
     }
 
-    public  void createContact()
-    {
-        System.out.println("name: ");
-        String name = Util.getUserInput();
 
-        System.out.println("surname: ");
-        String surname = Util.getUserInput();
-
-        System.out.println("phoneNumber: ");
-        String phoneNumber = Util.getUserInput();
-
-        System.out.println("emailAddress: ");
-        String emailAddress = Util.getUserInput();
-
-        addContact(new Contact(name, surname, phoneNumber, emailAddress));
-    }
 }
