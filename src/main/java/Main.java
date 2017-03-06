@@ -1,14 +1,15 @@
 import java.util.List;
 import java.util.logging.Logger;
-import com.sun.javafx.tools.packager.Log;
 
 
 /**
  * @author Iulian Aftene
  */
+
+
 public class Main
 {
-    public static void main(String [ ] args) throws Exception
+    public static void main(String[] args) throws Exception
     {
         Agenda agenda = Util.importFromXml();
         Logger logger = Logger.getLogger(Main.class.getName());
@@ -42,8 +43,8 @@ public class Main
                 for (Contact contact : contactsFound)
                     logger.info(
                         "\nName: " + contact.getName() + "\nSurname: " + contact.getSurname()
-                            + "\nemail: " + contact.getEmailAddress() + "\nPhone No.: "
-                            + contact.getPhoneNumber() + "\n");
+                            + "\nemail: " + contact.getEmailAddress() + "\nPhone No.: " + contact
+                            .getPhoneNumber() + "\n");
                 break;
             }
 

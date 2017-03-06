@@ -3,7 +3,6 @@ import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,10 +20,13 @@ public class Util
 
     public static void exportToXML(Agenda agenda)
     {
-        XMLEncoder encoder=null;
-        try{
-            encoder=new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Agenda.xml")));
-        }catch(FileNotFoundException fileNotFound){
+        XMLEncoder encoder = null;
+        try
+        {
+            encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Agenda.xml")));
+        }
+        catch (FileNotFoundException fileNotFound)
+        {
             Log.info("ERROR: While Creating or Opening the File Agenda.xml");
         }
         encoder.writeObject(agenda);
@@ -33,7 +35,8 @@ public class Util
 
     public static Agenda importFromXml() throws IOException
     {
-        XMLDecoder decoder = new XMLDecoder(new BufferedInputStream(new FileInputStream("Agenda.xml")));
+        XMLDecoder decoder = new XMLDecoder(
+            new BufferedInputStream(new FileInputStream("Agenda.xml")));
 
         Log.info("ERROR: File Agenda.xml not found");
 
@@ -46,7 +49,7 @@ public class Util
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        return  br.readLine();
+        return br.readLine();
     }
 
     public static Contact createContact() throws IOException
@@ -65,6 +68,6 @@ public class Util
         logger.info("emailAddress: ");
         String emailAddress = Util.getUserInput();
 
-        return(new Contact(name, surname, phoneNumber, emailAddress));
+        return (new Contact(name, surname, phoneNumber, emailAddress));
     }
 }
