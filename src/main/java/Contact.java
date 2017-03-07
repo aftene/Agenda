@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author Iulian Aftene
@@ -43,19 +44,27 @@ public class Contact
         return emailAddress;
     }
 
-    public void editContact()
-    {
-
-    }
-
     @Override
     public int hashCode()
     {
-        int result = getName().hashCode();
-        result = 31 * result + getSurname().hashCode();
-        result = 31 * result + getPhoneNumber().hashCode();
-        result = 31 * result + getEmailAddress().hashCode();
-        return result;
+//        int result = getName().hashCode();
+//        result = 31 * result + getSurname().hashCode();
+//        result = 31 * result + getPhoneNumber().hashCode();
+//        result = 31 * result + getEmailAddress().hashCode();
+//        return result;
+
+        return Objects.hash(name, surname, phoneNumber, emailAddress);
+    }
+
+    /**
+     * The obicei se fac compararile inauntru clasei
+     * @param userInput
+     * @return
+     */
+    public boolean isContactFromInput(String userInput)
+    {
+        return getName().equals(userInput) || getSurname().equals(userInput) ||
+                getEmailAddress().equals(userInput);
     }
 
 }

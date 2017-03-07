@@ -10,7 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
 
-import com.oracle.tools.packager.Log;
+// de unde e libraria asta???? Daca folosesti o librarie adauga-o in gradle
+//import com.oracle.tools.packager.Log;
 
 /**
  * @author Iulian Aftene
@@ -20,17 +21,15 @@ public class Util
 
     public static void exportToXML(Agenda agenda)
     {
-        XMLEncoder encoder = null;
-        try
+        // citeste despre AutoClosable
+        try(XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Agenda.xml"))))
         {
-            encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Agenda.xml")));
+            encoder.writeObject(agenda);
         }
         catch (FileNotFoundException fileNotFound)
         {
-            Log.info("ERROR: While Creating or Opening the File Agenda.xml");
+            Logger.getGlobal().info("ERROR: While Creating or Opening the File Agenda.xml");
         }
-        encoder.writeObject(agenda);
-        encoder.close();
     }
 
     public static Agenda importFromXml() throws IOException
@@ -38,11 +37,9 @@ public class Util
         XMLDecoder decoder = new XMLDecoder(
             new BufferedInputStream(new FileInputStream("Agenda.xml")));
 
-        Log.info("ERROR: File Agenda.xml not found");
+        Logger.getGlobal().info("ERROR: File Agenda.xml not found");
 
-        Agenda deserializedAgenda = (Agenda) decoder.readObject();
-
-        return deserializedAgenda;
+        return (Agenda) decoder.readObject();
     }
 
     public static String getUserInput() throws IOException
